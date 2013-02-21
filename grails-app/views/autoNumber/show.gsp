@@ -50,15 +50,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${autoNumberInstance?.autonumber}">
-				<li class="fieldcontain">
-					<span id="autonumber-label" class="property-label"><g:message code="autoNumber.autonumber.label" default="Autonumber" /></span>
-					
-						<span class="property-value" aria-labelledby="autonumber-label"><g:fieldValue bean="${autoNumberInstance}" field="autonumber"/></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

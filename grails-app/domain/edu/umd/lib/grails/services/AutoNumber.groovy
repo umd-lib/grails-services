@@ -13,23 +13,14 @@ class AutoNumber {
 		entryDate (nullable: true)
     }
 	
-//	static mapping = {
-//		table 'frmScan'
-//		version false
-//		id generator: 'hilo',
-//		   params: [table: 'FRMSCAN',
-//					column: 'autoNumber',
-//					max_lo: 100]
-//	}
 	static mapping = {
-		table 'FrmScan'
+		table 'autoNumber'
 		version false
-		autonumber column: 'frmscan_id'
+		id column: 'autoNumber_id' 
 	}
 	
-	Integer autonumber;
-	String repository;
-	String initials;
-	Date entryDate;
-	
+	Integer id 
+	String repository
+	String initials
+	Date entryDate
 }

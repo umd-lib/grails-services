@@ -26,11 +26,3 @@
 	<g:datePicker name="entryDate" precision="day"  value="${autoNumberInstance?.entryDate}" default="none" noSelection="['': '']" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'autonumber', 'error')} required">
-	<label for="autonumber">
-		<g:message code="autoNumber.autonumber.label" default="Autonumber" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="autonumber" type="number" value="${autoNumberInstance.autonumber}" required=""/>
-</div>
-
