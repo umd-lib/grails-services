@@ -5,7 +5,7 @@ import java.util.Date;
 import groovy.transform.ToString
 
 @ToString(includeNames=true)
-class FormScan {
+class AutoNumber {
 
     static constraints = {
 		repository (nullable: true)
@@ -24,11 +24,12 @@ class FormScan {
 	static mapping = {
 		table 'FrmScan'
 		version false
-		id column: 'frmscan_id'
+		autonumber column: 'frmscan_id'
 	}
 	
-//	Integer autoNumber;
+	Integer autonumber;
 	String repository;
 	String initials;
 	Date entryDate;
+	
 }
