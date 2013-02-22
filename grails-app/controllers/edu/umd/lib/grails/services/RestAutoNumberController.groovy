@@ -34,7 +34,13 @@ class RestAutoNumberController {
 				render retObjects as JSON 
 			}
 			xml { 
-				render retObjects as XML 
+				render { 
+					files { 
+						for ( retObject in retObjects ) {
+							file(retObject.filename)
+						}
+					}
+				}
 			}
 		}
 //		render retObjects
@@ -53,7 +59,13 @@ class RestAutoNumberController {
 					render restRetPojo as JSON 
 				}
 				xml { 
-					render restRetPojo as XML 
+					render { 
+						files { 
+							for ( retObject in retObjects ) {
+								file(retObject.filename)
+							}
+						}
+					}
 				}
 			}
 //			render new RestRetPojo (retVal) 
@@ -62,7 +74,7 @@ class RestAutoNumberController {
 	
 	def delete() {
 		response.status = 403;
-		render() "Delete request not supported"
+		response.outputStream << "Delete request not supported"
 	}
 
 
