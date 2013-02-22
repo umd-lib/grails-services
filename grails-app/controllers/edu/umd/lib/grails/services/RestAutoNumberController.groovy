@@ -7,6 +7,13 @@ class RestAutoNumberController {
 
 //	static allowedMethods = [show: "GET", save: "PUT", update: "POST", delete: "DELETE"]
 	
+	static {
+		grails.converters.JSON.registerObjectMarshaller(RestRetPojo) {
+			return it.properties.findAll {k,v -> k != 'class'}
+		}
+	}
+
+	
 	def show() {
 		
 		if(log.debugEnabled) {
