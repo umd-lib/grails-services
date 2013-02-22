@@ -19,7 +19,7 @@ class AutoNumber {
 		id column: 'autoNumber_id' 
 	}
 	
-	Integer id 
+	Long id 
 	String repository
 	String initials
 	Date entryDate

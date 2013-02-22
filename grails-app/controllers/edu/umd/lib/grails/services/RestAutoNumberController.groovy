@@ -9,7 +9,7 @@ class RestAutoNumberController {
 	
 	static {
 		grails.converters.JSON.registerObjectMarshaller(RestRetPojo) {
-			return it.properties.findAll {k,v -> k != 'class'}
+			return it.properties.findAll {k,v -> k != "class"}
 		}
 	}
 
@@ -37,7 +37,7 @@ class RestAutoNumberController {
 				render { 
 					files { 
 						for ( retObject in retObjects ) {
-							file(retObject.filename)
+							file(filename: retObject.filename)
 						}
 					}
 				}
@@ -54,16 +54,14 @@ class RestAutoNumberController {
 			render "Failed to update DataBase"
 		} else {
 			def restRetPojo = new RestRetPojo (retVal)
-			request.withFormat {				
+			response.withFormat {				
 				json { 
 					render restRetPojo as JSON 
 				}
 				xml { 
 					render { 
 						files { 
-							for ( retObject in retObjects ) {
-								file(retObject.filename)
-							}
+							file(filename: restRetPojo.filename)
 						}
 					}
 				}
