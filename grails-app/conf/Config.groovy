@@ -13,9 +13,8 @@
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
-grails.mime.use.accept.header = false
+grails.mime.use.accept.header = true
 grails.mime.types = [
-    all:           '*/*',
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',
@@ -26,7 +25,8 @@ grails.mime.types = [
     multipartForm: 'multipart/form-data',
     rss:           'application/rss+xml',
     text:          'text/plain',
-    xml:           ['text/xml', 'application/xml']
+    xml:           ['text/xml', 'application/xml'],
+	all:           '*/*'
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
