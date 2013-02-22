@@ -37,9 +37,9 @@
 				<g:each in="${autoNumberInstanceList}" status="i" var="autoNumberInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-						<td><g:link action="show">${fieldValue(bean: autoNumberInstance, field: "id")}</g:link></td>
+						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "id")}</g:link></td>
 					
-						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "repository")}</g:link></td>
+						<td>${fieldValue(bean: autoNumberInstance, field: "repository")}</td>
 					
 						<td>${fieldValue(bean: autoNumberInstance, field: "initials")}</td>
 					
