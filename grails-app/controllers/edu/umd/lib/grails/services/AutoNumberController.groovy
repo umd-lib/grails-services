@@ -18,7 +18,27 @@ class AutoNumberController {
     def create() {
         [autoNumberInstance: new AutoNumber(params)]
     }
+	
+	def create2() {
+		def map = [repos :  ['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+		 autoNumberInstance: new AutoNumber(params) ]
+		render (view : "create2", model : map)
+	}
 
+	def save2() {
+		def newRec = new AutoNumber(initials: params.initials, repository : params.repository, entryDate: new Date())
+		def retVal = newRec.save()
+		if(retVal == null) {
+			response.status = 404;
+			render "Failed to update DataBase"
+		} else {
+			def restRetPojo = new RestRetPojo (retVal)
+			def map = [repos :  ['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+				fileName : restRetPojo.getFilename(), autoNumberInstance: new AutoNumber(params) ]
+			render (view : "create2", model : map)
+		}
+	}
+	
     def save() {
         def autoNumberInstance = new AutoNumber(params)
         if (!autoNumberInstance.save(flush: true)) {

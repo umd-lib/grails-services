@@ -10,6 +10,10 @@ class UrlMappings {
 			action = [GET: "displayForm", POST: "saveForm"]
 		}
 		
+		"/autonumberform2"(controller: "restAutoNumber") {
+			action = [GET: "displayForm2", POST: "saveForm2"]
+		}
+		
 		"/$controller/$action?/$id?"{
 			constraints {
 				// apply constraints here

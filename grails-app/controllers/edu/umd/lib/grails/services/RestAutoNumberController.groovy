@@ -88,5 +88,23 @@ class RestAutoNumberController {
 			render (view : "/restAutoNumber/autoNumberForm", model : map)
 		}
 	}
+	
+	def displayForm2() {
+		def map = [repos :  ['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'] ]
+		render (view : "/restAutoNumber/create2", model : map)
+	}
 
+	def saveForm2() {
+		def newRec = new AutoNumber(initials: params.initials, repository : params.repositoryInput, entryDate: new Date())
+		def retVal = newRec.save()
+		if(retVal == null) {
+			response.status = 404;
+			render "Failed to update DataBase"
+		} else {
+			def restRetPojo = new RestRetPojo (retVal)
+			def map = [repos :  ['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+				fileName : restRetPojo.getFilename() ]
+			render (view : "/restAutoNumber/create2", model : map)
+		}
+	}
 }
