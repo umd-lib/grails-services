@@ -17,14 +17,14 @@
 			<form class="formLayout" action="autonumberform" method="post">
 				<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'repository', 'error')} ">
 					<label class="formLabel" for="repository">
-						<g:message code="autoNumber.repository.label" default="Repository" />			
+						<g:message code="autoNumber.repository.label" default="Repository:" />			
 					</label>
 					<g:select name="repositorySelect" id="selectBox" from="${repos}" noSelection="['':'-Choose your repository-']" onchange="getCombo(this)"/>
 					<g:textField name="repositoryInput" id="repositoryInput" />
 				</div>
 				<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'initials', 'error')} ">
 					<label class="formLabel" for="initials">
-						<g:message code="autoNumber.initials.label" default="Initials" />				
+						<g:message code="autoNumber.initials.label" default="Initials:" />				
 					</label>
 					<g:textField name="initials" id="initialInput" />
 				</div>
@@ -33,7 +33,7 @@
 			
 			<div class="formLayout ${hasErrors(bean: autoNumberInstance, field: 'initials', 'error')} ">
 				<label class="formLabel" for="fileName">
-					<g:message code="autoNumber.fileName.label" default="File Name" />				
+					<g:message code="autoNumber.fileName.label" default="File Name:" />				
 				</label>
 				<g:textField name="fileName" id="fileName" disabled="true" value="${fileName}" />
 			</div>

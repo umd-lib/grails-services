@@ -7,7 +7,7 @@
 
 #repositoryInput {
 	width: 221px;
-	height: 1em;
+	height: 1.2em;
 	margin-left: -244px;
 	border: 1px white;
 }
@@ -24,19 +24,27 @@
 
 .formLabel {
 	display: inline-block;
-	width: 70px;
+	width: 85px;
 	text-align: center;
 }
 
 .bodyOutline {
 	display: block;
-	width: 400px;
+	width: 450px;
 	height: 200px;
 	margin-left: 20%;
 	margin-top: 10%;
-	border: 2px solid grey;
-	border-radius: 15px;	
-	background : lightgray;
+	border: 2px solid rgb(207, 207, 207);
+	border-radius: 10px;	
+	background : white;
+}
+
+.fieldcontain  {
+	margin-bottom: 5px;
+}
+
+.save {
+	width: 85px;
 }
 
 .formLayout {
@@ -44,5 +52,5 @@
 }
 
 body {
-	background: #b0c4de;
+	background: rgb(223, 229, 236);
 }
