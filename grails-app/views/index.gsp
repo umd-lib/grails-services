@@ -110,6 +110,16 @@
 			   click on each to execute its default action:</p>
 
 			<div id="controller-list" role="navigation">
+				<h2>Available Forms:</h2>
+				<ul>
+					<li class="controller">
+						<a href="/grails-services/autonumberform">AutoNumberForm</a>
+					</li>
+				</ul>
+			</div>
+
+
+			<div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
 				<ul>
 					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
