@@ -83,7 +83,9 @@ class RestAutoNumberController {
 			render "Failed to update DataBase"
 		} else {
 			def restRetPojo = new RestRetPojo (retVal)
-			render restRetPojo.getFilename()
+			def map = [repos :  ['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+				fileName : restRetPojo.getFilename() ]
+			render (view : "/restAutoNumber/autoNumberForm", model : map)
 		}
 	}
 

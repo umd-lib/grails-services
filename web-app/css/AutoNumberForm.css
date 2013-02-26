@@ -17,8 +17,32 @@
 	height : 1em;
 }
 
+#fileName {
+	width : 235px;
+	height : 1em;
+}
+
 .formLabel {
 	display: inline-block;
 	width: 70px;
 	text-align: center;
+}
+
+.bodyOutline {
+	display: block;
+	width: 400px;
+	height: 200px;
+	margin-left: 20%;
+	margin-top: 10%;
+	border: 2px solid grey;
+	border-radius: 15px;	
+	background : lightgray;
+}
+
+.formLayout {
+	margin: 10%;
+}
+
+body {
+	background: #b0c4de;
 }
