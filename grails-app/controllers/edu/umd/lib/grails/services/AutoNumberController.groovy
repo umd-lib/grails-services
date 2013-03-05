@@ -20,27 +20,7 @@ class AutoNumberController {
     }
 	
 	def create2() {
-		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-
-		org.springframework.http.ResponseEntity rp2 = rt.getForEntity("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read", edu.umd.lib.grails.services.Response.class)
-		edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
-		
-		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
-		def repoUnion = new HashSet()
-		
-		if(dbReps != null) {
-			for(Repository dbRep : dbReps) {
-				repoUnion.add(dbRep.repositoryName)
-			}
-		}
-		
-		if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
-			for(String frep : rp3.getList().get(0).getTerms()) {
-				repoUnion.add(frep)
-			}
-		}
-		
-		
+		def repoUnion = getRepos ()	
 		def map = [repos : repoUnion , //['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
 		 autoNumberInstance: new AutoNumber(params) ]
 		render (view : "create2", model : map)
@@ -69,30 +49,36 @@ class AutoNumberController {
 		} else {
 			def restRetPojo = new RestRetPojo (retVal)
 			
-			org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-			
-			org.springframework.http.ResponseEntity rp2 = rt.getForEntity("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read", edu.umd.lib.grails.services.Response.class)
-			edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
-		
-			def dbReps = Repository.list(sort:'repositoryName',order:'asc')
-			def repoUnion = new HashSet()
-			
-			if(dbReps != null) {
-				for(Repository dbRep : dbReps) {
-					repoUnion.add(dbRep.repositoryName)
-				}
-			}
-			
-			if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
-				for(String frep : rp3.getList().get(0).getTerms()) {
-					repoUnion.add(frep)
-				}
-			}
+			def repoUnion = getRepos ()
 			
 			def map = [repos : repoUnion, //Repository.list(sort:'repositoryName',order:'asc'),//['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
 				fileName : restRetPojo.getFilename(), autoNumberInstance: retVal ]
 			render (view : "create2", model : map)
 		}
+	}
+	
+	def getRepos () {
+		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+		
+		org.springframework.http.ResponseEntity rp2 = rt.getForEntity("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read", edu.umd.lib.grails.services.Response.class)
+		edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
+	
+		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
+		def repoUnion = new HashSet()
+		
+		if(dbReps != null) {
+			for(Repository dbRep : dbReps) {
+				repoUnion.add(dbRep.repositoryName)
+			}
+		}
+		
+		if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
+			for(String frep : rp3.getList().get(0).getTerms()) {
+				repoUnion.add(frep)
+			}
+		}
+		
+		return repoUnion
 	}
 
     def save() {
