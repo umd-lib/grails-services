@@ -1,6 +1,6 @@
 
 <%@ page import="edu.umd.lib.grails.services.AutoNumber" %>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list autoNumber">
 			
-				<g:if test="${autoNumberInstance?.repository}">
+				<g:if test="${autoNumberInstance?.entryDate}">
 				<li class="fieldcontain">
-					<span id="repository-label" class="property-label"><g:message code="autoNumber.repository.label" default="Repository" /></span>
+					<span id="entryDate-label" class="property-label"><g:message code="autoNumber.entryDate.label" default="Entry Date" /></span>
 					
-						<span class="property-value" aria-labelledby="repository-label"><g:fieldValue bean="${autoNumberInstance}" field="repository"/></span>
+						<span class="property-value" aria-labelledby="entryDate-label"><g:formatDate date="${autoNumberInstance?.entryDate}" /></span>
 					
 				</li>
 				</g:if>
@@ -36,16 +36,16 @@
 				<li class="fieldcontain">
 					<span id="initials-label" class="property-label"><g:message code="autoNumber.initials.label" default="Initials" /></span>
 					
-						<span class="property-value" aria-labelledby="initials-label"><g:fieldValue bean="${autoNumberInstance}" field="initials"/></span>
+						<span class="property-value" aria-labelledby="initials-label"><g:link controller="initials" action="show" id="${autoNumberInstance?.initials?.id}">${autoNumberInstance?.initials?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${autoNumberInstance?.entryDate}">
+				<g:if test="${autoNumberInstance?.repository}">
 				<li class="fieldcontain">
-					<span id="entryDate-label" class="property-label"><g:message code="autoNumber.entryDate.label" default="Entry Date" /></span>
+					<span id="repository-label" class="property-label"><g:message code="autoNumber.repository.label" default="Repository" /></span>
 					
-						<span class="property-value" aria-labelledby="entryDate-label"><g:formatDate date="${autoNumberInstance?.entryDate}" /></span>
+						<span class="property-value" aria-labelledby="repository-label"><g:link controller="repository" action="show" id="${autoNumberInstance?.repository?.id}">${autoNumberInstance?.repository?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

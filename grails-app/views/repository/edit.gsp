@@ -1,13 +1,13 @@
-<%@ page import="edu.umd.lib.grails.services.AutoNumber" %>
+<%@ page import="edu.umd.lib.grails.services.Repository" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'autoNumber.label', default: 'AutoNumber')}" />
+		<g:set var="entityName" value="${message(code: 'repository.label', default: 'Repository')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#edit-autoNumber" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#edit-repository" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -15,21 +15,21 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-		<div id="edit-autoNumber" class="content scaffold-edit" role="main">
+		<div id="edit-repository" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<g:hasErrors bean="${autoNumberInstance}">
+			<g:hasErrors bean="${repositoryInstance}">
 			<ul class="errors" role="alert">
-				<g:eachError bean="${autoNumberInstance}" var="error">
+				<g:eachError bean="${repositoryInstance}" var="error">
 				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${autoNumberInstance?.id}" />
-				<g:hiddenField name="version" value="${autoNumberInstance?.version}" />
+				<g:hiddenField name="id" value="${repositoryInstance?.id}" />
+				<g:hiddenField name="version" value="${repositoryInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

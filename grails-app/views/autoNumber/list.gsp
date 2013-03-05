@@ -1,6 +1,6 @@
 
 <%@ page import="edu.umd.lib.grails.services.AutoNumber" %>
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
@@ -22,28 +22,25 @@
 			</g:if>
 			<table>
 				<thead>
-					<tr>				
-						<g:sortableColumn property="id" title="Auto Number" />
-					
-						<g:sortableColumn property="repository" title="${message(code: 'autoNumber.repository.label', default: 'Repository')}" />
-					
-						<g:sortableColumn property="initials" title="${message(code: 'autoNumber.initials.label', default: 'Initials')}" />
+					<tr>
 					
 						<g:sortableColumn property="entryDate" title="${message(code: 'autoNumber.entryDate.label', default: 'Entry Date')}" />
+					
+						<th><g:message code="autoNumber.initials.label" default="Initials" /></th>
+					
+						<th><g:message code="autoNumber.repository.label" default="Repository" /></th>
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${autoNumberInstanceList}" status="i" var="autoNumberInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "id")}</g:link></td>
 					
-						<td>${fieldValue(bean: autoNumberInstance, field: "repository")}</td>
+						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "entryDate")}</g:link></td>
 					
 						<td>${fieldValue(bean: autoNumberInstance, field: "initials")}</td>
 					
-						<td><g:formatDate date="${autoNumberInstance.entryDate}" /></td>
+						<td>${fieldValue(bean: autoNumberInstance, field: "repository")}</td>
 					
 					</tr>
 				</g:each>

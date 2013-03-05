@@ -1,15 +1,13 @@
 package edu.umd.lib.grails.services
 
-import java.util.Date;
-
 import groovy.transform.ToString
 
 @ToString(includeNames=true)
 class AutoNumber {
 
     static constraints = {
-		repository (nullable: true)
-		initials  (nullable: true)
+//		repository (nullable: true)
+//		initials  (nullable: true)
 		entryDate (nullable: true)
     }
 	
@@ -17,10 +15,13 @@ class AutoNumber {
 		table 'autoNumber'
 		version false
 		id column: 'autoNumber_id' 
+		repository lazy: false
 	}
 	
+//	static belongsTo = [repository: Repository, initials Initials]
+	
 	Long id 
-	String repository
-	String initials
+	Repository repository
+	Initials initials
 	Date entryDate
 }

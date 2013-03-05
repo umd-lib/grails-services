@@ -9,12 +9,11 @@ import grails.test.mixin.*
 @Mock(AutoNumber)
 class AutoNumberControllerTests {
 
+
     def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        params["repository"] = 'tmpRepo'
-		params["initials"] = 'tst'
-		params["entryDate"] = new Date ()
+      assert params != null
+      // TODO: Populate valid properties like...
+      //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -31,24 +30,19 @@ class AutoNumberControllerTests {
     }
 
     void testCreate() {
-        def model = controller.create()
+       def model = controller.create()
 
-        assert model.autoNumberInstance != null
+       assert model.autoNumberInstance != null
     }
 
     void testSave() {
-		
-/***********************************************
- * 	Commenting out null test here, for this controller can actually add an item that has null fields
         controller.save()
 
         assert model.autoNumberInstance != null
         assert view == '/autoNumber/create'
 
         response.reset()
-***********************************************/
-		
-		
+
         populateValidParams(params)
         controller.save()
 
@@ -62,6 +56,7 @@ class AutoNumberControllerTests {
 
         assert flash.message != null
         assert response.redirectedUrl == '/autoNumber/list'
+
 
         populateValidParams(params)
         def autoNumber = new AutoNumber(params)
@@ -80,6 +75,7 @@ class AutoNumberControllerTests {
 
         assert flash.message != null
         assert response.redirectedUrl == '/autoNumber/list'
+
 
         populateValidParams(params)
         def autoNumber = new AutoNumber(params)
@@ -101,26 +97,22 @@ class AutoNumberControllerTests {
 
         response.reset()
 
+
         populateValidParams(params)
         def autoNumber = new AutoNumber(params)
 
-        assert autoNumber.save(flush: true) != null
+        assert autoNumber.save() != null
 
-//		log.error "auto [" + autoNumber + "]"
         // test invalid parameters in update
-//        params.id = autoNumber.id
-//		log.error "params [" + params + "]"
-/*		Again this controller supports a null object
- * 		
+        params.id = autoNumber.id
+        //TODO: add invalid values to params object
 
         controller.update()
 
         assert view == "/autoNumber/edit"
         assert model.autoNumberInstance != null
 
-		
         autoNumber.clearErrors()
-*/
 
         populateValidParams(params)
         controller.update()
@@ -128,13 +120,10 @@ class AutoNumberControllerTests {
         assert response.redirectedUrl == "/autoNumber/show/$autoNumber.id"
         assert flash.message != null
 
-/************************************
- * Not using versioning so no need
         //test outdated version number
         response.reset()
         autoNumber.clearErrors()
 
-		log.error "params again [" + params + "]"
         populateValidParams(params)
         params.id = autoNumber.id
         params.version = -1
@@ -144,7 +133,6 @@ class AutoNumberControllerTests {
         assert model.autoNumberInstance != null
         assert model.autoNumberInstance.errors.getFieldError('version')
         assert flash.message != null
-************************************/
     }
 
     void testDelete() {

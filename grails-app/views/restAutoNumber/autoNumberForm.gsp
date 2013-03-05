@@ -19,7 +19,7 @@
 					<label class="formLabel" for="repository">
 						<g:message code="autoNumber.repository.label" default="Repository:" />			
 					</label>
-					<g:select name="repositorySelect" id="selectBox" from="${repos}" noSelection="['':'-Choose your repository-']" onchange="getCombo(this)"/>
+					<g:select name="repositorySelect" id="selectBox" from="${repos?.repository}" noSelection="['':'-Choose your repository-']" onchange="getCombo(this)"/>
 					<g:textField name="repositoryInput" id="repositoryInput" />
 				</div>
 				<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'initials', 'error')} ">
