@@ -3,7 +3,7 @@
 	<head>
 		<meta name="layout" content="AutoNumberForm">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'AutoNumberForm.css')}" type="text/css">
-		<link href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" type="text/css" rel="stylesheet" media="screen, projection" />
+		<link href="css/smoothness/jquery-ui-1.10.1.custom.css" type="text/css" rel="stylesheet" media="screen, projection" />
 		<g:javascript src="jquery-1.9.1.js" />
 		<g:javascript src="jquery-ui-1.10.1.custom.js" />
 		<g:javascript src="AutoNumberForm.js" />
