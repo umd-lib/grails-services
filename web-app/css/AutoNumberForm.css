@@ -5,6 +5,10 @@
 	height: 1em;
 }
 
+input.ui-combobox-input {
+	margin: 0px;
+}
+
 #repositoryInput {
 	width: 221px;
 	height: 1.2em;
@@ -53,4 +57,11 @@
 
 body {
 	background: rgb(223, 229, 236);
+}
+
+a.ui-button {
+	height: 24px;
+	width: 12px;
+	position: fixed;
+	padding-top: 0px;
 }

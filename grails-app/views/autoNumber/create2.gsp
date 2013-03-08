@@ -18,6 +18,12 @@
 		<g:javascript src="jquery-1.9.1.js" />
 		<g:javascript src="jquery-ui-1.10.1.custom.js" />
 		<g:javascript src="AutoNumberForm.js" />
+		<script type="text/javascript">
+			$(document).ready(function() {	
+				$( "#initialsSelectBox" ).combobox({inputName : "initials"});	
+				$( "#selectBox" ).combobox({inputName : "repository"});
+			});
+		</script>
 		<%--<g:javascript library="jquery" plugin="jquery"/>
 		<r:require module="jquery-ui"/>
 		--%>

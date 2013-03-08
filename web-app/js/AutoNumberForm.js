@@ -1,31 +1,3 @@
-$(document).ready(function() {
-//	$("#initialsInput").autocomplete({
-//		source: function( request, response ) {
-//            var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-//            response( $("#initialsSelectBox").children( "option" ).map(function() {
-//              var text = $( this ).text();
-//              if ( this.value && ( !request.term || matcher.test(text) ) )
-//                return {
-//                  label: text.replace(
-//                    new RegExp(
-//                      "(?![^&;]+;)(?!<[^<>]*)(" +
-//                      $.ui.autocomplete.escapeRegex(request.term) +
-//                      ")(?![^<>]*>)(?![^&;]+;)", "gi"
-//                    ), "$1" ),
-//                  value: text,
-//                  option: this
-//                };
-//            }) );
-//          }
-//	});
-//	$("#initialsSelectBox").change(function() {
-//	    var nwval = $(this).val();
-//	    $('#initialsInput').val(nwval);
-//	});
-	
-	$( "#initialsSelectBox" ).combobox({inputName : "initials"});	
-	$( "#selectBox" ).combobox({inputName : "repository"});
-});
 function getCombo(sel, fieldName) {
 	var value = sel.options[sel.selectedIndex].value;
 	var element = document.getElementById(fieldName);
