@@ -6,6 +6,9 @@ class AutoNumberController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def repoFetchUrl
+	def repoUpdateUrl
+	
     def index() {
         redirect(action: "list", params: params)
     }
