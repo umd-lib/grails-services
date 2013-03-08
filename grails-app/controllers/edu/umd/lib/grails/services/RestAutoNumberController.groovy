@@ -114,7 +114,7 @@ class RestAutoNumberController {
 		edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
 	
 		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
-		def repoUnion = new HashSet()
+		def repoUnion = new TreeSet()
 		
 		if(dbReps != null) {
 			for(Repository dbRep : dbReps) {

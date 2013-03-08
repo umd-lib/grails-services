@@ -60,7 +60,7 @@
 						<label for="initials">
 							<g:message code="autoNumber.initials.label" default="Initials" />
 						</label>
-						<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list()}" noSelection="['':'-Choose your initials-']" />
+						<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list(sort:'initialsName',order:'asc')}" noSelection="['':'-Choose your initials-']" />
 						<%--			
 						<g:textField name="initials" id="initialsInput" value="${autoNumberInstance?.initials?.initialsName}"/>
 					--%></div>

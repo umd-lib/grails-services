@@ -29,7 +29,7 @@
 					<label class="formLabel" for="initials">
 						<g:message code="autoNumber.initials.label" default="Initials:" />				
 					</label>
-					<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list()}" noSelection="['':'-Choose your initials-']" />
+					<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list(sort:'initialsName',order:'asc')}" noSelection="['':'-Choose your initials-']" />
 				</div>
 				<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 			</form>
