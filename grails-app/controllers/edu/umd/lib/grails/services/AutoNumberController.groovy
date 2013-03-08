@@ -32,6 +32,7 @@ class AutoNumberController {
 		if(repo == null) {
 			repo = new Repository(RepositoryName : params.repository)
 			repo.save()
+			setRepos (params.repository)
 		}
 		
 		def init = Initials.findByInitialsName(params.initials)
@@ -55,6 +56,14 @@ class AutoNumberController {
 				fileName : restRetPojo.getFilename(), autoNumberInstance: retVal ]
 			render (view : "create2", model : map)
 		}
+	}
+	
+	def setRepos (String term) {
+		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+		def updateUrl =  repoUpdateUrl as String
+		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
+		log.debug(updateUrl)
+		org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
 	}
 	
 	def getRepos () {

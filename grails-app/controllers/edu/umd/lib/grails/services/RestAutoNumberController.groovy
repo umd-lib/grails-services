@@ -1,7 +1,8 @@
 package edu.umd.lib.grails.services
 
 import grails.converters.JSON
-import grails.converters.XML
+
+import javax.naming.InitialContext
 class RestAutoNumberController {
 	
 	static {
@@ -10,6 +11,9 @@ class RestAutoNumberController {
 		}
 	}
 
+	def repoFetchUrl
+	def repoUpdateUrl
+	
 	
 	def show() {
 		
@@ -19,7 +23,11 @@ class RestAutoNumberController {
 			log.debug "Request Format " + request.getFormat()
 			log.debug "Response Format " + response.getFormat()
 		}
-		def recs = AutoNumber.findAllWhere(initials: params.initials, repository : params.repository)
+		
+		def init = Initials.findByInitialsName(params.initials)
+		def repo = Repository.findByRepositoryName(params.repository)
+		
+		def recs = AutoNumber.findAllWhere(initials: init, repository : repo)
 		
 		def retObjects = []
 		for ( rec in recs ) {
@@ -43,7 +51,23 @@ class RestAutoNumberController {
 	}
 
 	def save() {
-		def newRec = new AutoNumber(initials: params.initials, repository : params.repository, entryDate: new Date())
+		def repo = Repository.findByRepositoryName(params.repository)
+		
+		if(repo == null) {
+			repo = new Repository(RepositoryName : params.repository)
+			repo.save()
+			setRepos (params.repository)
+		}
+		
+		def init = Initials.findByInitialsName(params.initials)
+		
+		if(init == null) {
+			init = new Initials(InitialsName : params.initials)
+			init.save()
+		}
+		
+		def newRec = new AutoNumber(initials: init, repository : repo, entryDate: new Date())
+		
 		def retVal = newRec.save()
 		if(retVal == null) {
 			response.status = 404;
@@ -78,12 +102,13 @@ class RestAutoNumberController {
 	}
 	
 	def saveForm() {
-		
+//		println repoUrl
 		def repo = Repository.findByRepositoryName(params.repository)
 		
 		if(repo == null) {
 			repo = new Repository(RepositoryName : params.repository)
 			repo.save()
+			setRepos (params.repository)
 		}
 		
 		def init = Initials.findByInitialsName(params.initials)
@@ -107,10 +132,18 @@ class RestAutoNumberController {
 		}
 	}
 	
+	def setRepos (String term) {
+		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+		def updateUrl =  repoUpdateUrl as String 
+		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
+		log.debug(updateUrl)
+		org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
+	}
+	
+	
 	def getRepos () {
 		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-		
-		org.springframework.http.ResponseEntity rp2 = rt.getForEntity("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read", edu.umd.lib.grails.services.Response.class)
+		org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
 		edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
 	
 		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
