@@ -38,6 +38,7 @@ grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
+grails.views.javascript.library="jquery"
 grails.converters.encoding = "UTF-8"
 grails.converters.xml.pretty.print = true
 grails.converters.json.pretty.print = true

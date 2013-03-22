@@ -30,23 +30,24 @@ class AutoNumberController {
 	}
 
 	def save2() {
+		println params
 		def repo = Repository.findByRepositoryName(params.repository)
 		
 		if(repo == null) {
-			repo = new Repository(RepositoryName : params.repository)
-			repo.save()
+			repo = new Repository(repositoryName : params.repository)
+			repo.save(failOnError : true, flush: true)
 			setRepos (params.repository)
 		}
 		
 		def init = Initials.findByInitialsName(params.initials)
 		
 		if(init == null) {
-			init = new Initials(InitialsName : params.initials)
-			init.save()
+			init = new Initials(initialsName : params.initials)
+			init.save(failOnError : true, flush: true)
 		}
 		
 		def newRec = new AutoNumber(initials: init, repository : repo, entryDate: new Date())
-		def retVal = newRec.save(failOnError : true)
+		def retVal = newRec.save(failOnError : true, flush: true)
 		if(retVal == null) {
 			response.status = 404;
 			render "Failed to update DataBase"
