@@ -1,19 +1,26 @@
 package edu.umd.lib.grails.services
 
 
+import grails.test.mixin.*
 
 import org.junit.*
-import grails.test.mixin.*
 
 @TestFor(AutoNumberController)
 @Mock(AutoNumber)
 class AutoNumberControllerTests {
 
-
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+
+	  def repo = new Repository(repositoryName : "testRepo")
+	  //repo.save()
+		  
+	  def init = new Initials(initialsName : "TST")
+	  //init.save(failOnError : true, flush: true)
+		  
+	  params["repository"] = repo
+	  params["initials"] = init
+
     }
 
     void testIndex() {
@@ -106,6 +113,8 @@ class AutoNumberControllerTests {
         // test invalid parameters in update
         params.id = autoNumber.id
         //TODO: add invalid values to params object
+		params.repository = null
+		params.initials = null
 
         controller.update()
 
@@ -121,18 +130,18 @@ class AutoNumberControllerTests {
         assert flash.message != null
 
         //test outdated version number
-        response.reset()
-        autoNumber.clearErrors()
-
-        populateValidParams(params)
-        params.id = autoNumber.id
-        params.version = -1
-        controller.update()
-
-        assert view == "/autoNumber/edit"
-        assert model.autoNumberInstance != null
-        assert model.autoNumberInstance.errors.getFieldError('version')
-        assert flash.message != null
+//        response.reset()
+//        autoNumber.clearErrors()
+//
+//        populateValidParams(params)
+//        params.id = autoNumber.id
+//        params.version = -1
+//        controller.update()
+//
+//        assert view == "/autoNumber/edit"
+//        assert model.autoNumberInstance != null
+//        assert model.autoNumberInstance.errors.getFieldError('version')
+//        assert flash.message != null
     }
 
     void testDelete() {

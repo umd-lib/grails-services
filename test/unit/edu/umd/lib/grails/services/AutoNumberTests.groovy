@@ -1,18 +1,26 @@
 package edu.umd.lib.grails.services
 
-
-
+import static org.junit.Assert.*
 import grails.test.mixin.*
+import grails.test.mixin.support.*
+
 import org.junit.*
 
 /**
- * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
+ * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
  */
-@TestFor(AutoNumber)
+@TestMixin(GrailsUnitTestMixin)
 class AutoNumberTests {
 
+    void setUp() {
+        // Setup logic here
+    }
+
+    void tearDown() {
+        // Tear down logic here
+    }
+
     void testSomething() {
-		assert true
-       //fail "Implement me"
+        //fail "Implement me"
     }
 }

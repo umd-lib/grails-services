@@ -45,6 +45,6 @@ There is an attached SoapUI project which can be used to test the rest services 
 ---
 Build Instructions
 -------------
-To build project execute `mvn -DskipTests clean install` from the project root directory. 
+To build project execute `mvn clean install` from the project root directory. 
 
 That will create 1 .war (the services code) located here `./target/grails-services-{version}.war`
