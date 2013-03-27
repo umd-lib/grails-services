@@ -78,6 +78,7 @@ log4j = {
     //
     appenders {
         console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+		rollingFile name: "stacktrace", maxFileSize: 1024, file: "./logs/myapp-stacktrace.log"
     }
 
     warn  'org.codehaus.groovy.grails.web.servlet',        // controllers
