@@ -113,7 +113,7 @@
 				<h2>Available Forms:</h2>
 				<ul>
 					<li class="controller">
-						<a href="/grails-services/autoNumber/create2">GrailsAutoNumberForm</a>
+						<a href="./autoNumber/create2">GrailsAutoNumberForm</a>
 					</li><%--
 					<li class="controller">
 						<a href="/grails-services/autonumberform">AutoNumberForm</a>						
