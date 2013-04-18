@@ -15,7 +15,7 @@ public class RestRetPojo {
 	
 	public RestRetPojo(AutoNumber autoNumber) {
 		super();
-		this.filename = autoNumber.getRepository().getRepositoryName() + "-" + autoNumber.getId() + "-0001";
+		this.filename = autoNumber.getRepository().getRepositoryName() + "-" + autoNumber.getId();
 	}
 
 	public String getFilename() {
