@@ -23,12 +23,13 @@
 			<table>
 				<thead>
 					<tr>
+						<g:sortableColumn property="id" title="${message(code: 'autoNumber.id.label', default: 'AutoNumber')}" />
 					
 						<g:sortableColumn property="entryDate" title="${message(code: 'autoNumber.entryDate.label', default: 'Entry Date')}" />
 					
-						<th><g:message code="autoNumber.initials.label" default="Initials" /></th>
+						<g:sortableColumn property="initials" title="${message(code: 'autoNumber.initials.label', default: 'Initials')}" />
 					
-						<th><g:message code="autoNumber.repository.label" default="Repository" /></th>
+						<g:sortableColumn property="repository" title="${message(code: 'autoNumber.repository.label', default: 'Repository')}" />
 					
 					</tr>
 				</thead>
@@ -36,7 +37,9 @@
 				<g:each in="${autoNumberInstanceList}" status="i" var="autoNumberInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "entryDate")}</g:link></td>
+						<td><g:link action="show" id="${autoNumberInstance.id}">${fieldValue(bean: autoNumberInstance, field: "id")}</g:link></td>
+					
+						<td>${fieldValue(bean: autoNumberInstance, field: "entryDate")}</td>
 					
 						<td>${fieldValue(bean: autoNumberInstance, field: "initials")}</td>
 					
