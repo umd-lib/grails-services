@@ -22,6 +22,17 @@ environments {
       		url = "jdbc:h2:devDB;AUTO_SERVER=TRUE"
         }
     }
+	dataloadenv {
+		dataSource {
+			pooled = false
+			  logSql = false
+			  dbCreate = "create-drop"
+			  username="gs"
+			  password="gs"
+			  driverClassName="org.postgresql.Driver"
+			  url="jdbc:postgresql://localhost:5432/gs"
+		}
+	}
     test {
         dataSource {
             dbCreate = "update"
