@@ -137,14 +137,24 @@ class RestAutoNumberController {
 		def updateUrl =  repoUpdateUrl as String 
 		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
 		log.debug(updateUrl)
-		org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
+		try {
+			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
+		} catch (Exception e) {
+			log.error("Problem setting repos in fedora", e)
+		}
 	}
 	
 	
 	def getRepos () {
-		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-		org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
-		edu.umd.lib.grails.services.Response rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
+		edu.umd.lib.grails.services.Response rp3 = null;
+		
+		try {
+			org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
+			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
+		} catch (Exception e) {
+			log.error("Problem getting repos from fedora", e)
+		}
 	
 		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
 		def repoUnion = new TreeSet()
