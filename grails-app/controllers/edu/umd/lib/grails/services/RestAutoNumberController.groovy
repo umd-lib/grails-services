@@ -2,7 +2,7 @@ package edu.umd.lib.grails.services
 
 import grails.converters.JSON
 
-import javax.naming.InitialContext
+import javax.xml.parsers.FactoryConfigurationError
 class RestAutoNumberController {
 	
 	static {
@@ -141,6 +141,8 @@ class RestAutoNumberController {
 			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
 		} catch (Exception e) {
 			log.error("Problem setting repos in fedora", e)
+		} catch (FactoryConfigurationError e) {
+			log.error("Problem getting repos from fedora", e)
 		}
 	}
 	
@@ -153,6 +155,8 @@ class RestAutoNumberController {
 			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
 			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
 		} catch (Exception e) {
+			log.error("Problem getting repos from fedora", e)
+		} catch (FactoryConfigurationError e) {
 			log.error("Problem getting repos from fedora", e)
 		}
 	

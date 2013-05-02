@@ -1,5 +1,7 @@
 package edu.umd.lib.grails.services
 
+import javax.xml.parsers.FactoryConfigurationError
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class AutoNumberController {
@@ -71,6 +73,8 @@ class AutoNumberController {
 			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
 		} catch (Exception e) {
 			log.error("Problem setting repos in fedora", e)
+		} catch (FactoryConfigurationError e) {
+			log.error("Problem getting repos from fedora", e)
 		}
 	}
 	
@@ -82,6 +86,8 @@ class AutoNumberController {
 			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
 			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
 		} catch (Exception e) {
+			log.error("Problem getting repos from fedora", e)
+		} catch (FactoryConfigurationError e) {
 			log.error("Problem getting repos from fedora", e)
 		}
 	
