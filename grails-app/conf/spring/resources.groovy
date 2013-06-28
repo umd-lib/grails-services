@@ -17,21 +17,21 @@ beans = {
 //		// Call the constructor
 //		Context ctx = new InitialContext(env);
 		
-		repoFetchUrl(org.springframework.jndi.JndiObjectFactoryBean){
-			defaultObject = new String ("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read")
-			jndiName = 'java:comp/env/repoFetchUrl'
-		}
-		repoUpdateUrl(org.springframework.jndi.JndiObjectFactoryBean){
-			defaultObject = new String ("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/term/{term}/create")
-			jndiName = 'java:comp/env/repoUpdateUrl'
-		}
-	} else if(Environment.getCurrent() == Environment.PRODUCTION) {
-		repoFetchUrl(org.springframework.jndi.JndiObjectFactoryBean){
-			jndiName = 'java:comp/env/repoFetchUrl'
-		}
-		repoUpdateUrl(org.springframework.jndi.JndiObjectFactoryBean){
-			jndiName = 'java:comp/env/repoUpdateUrl'
-		}
-	} else if(Environment.getCurrent() == Environment.TEST) {
+//		repoFetchUrl(org.springframework.jndi.JndiObjectFactoryBean){
+//			defaultObject = new String ("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/read")
+//			jndiName = 'java:comp/env/repoFetchUrl'
+//		}
+//		repoUpdateUrl(org.springframework.jndi.JndiObjectFactoryBean){
+//			defaultObject = new String ("http://fedorastage.lib.umd.edu/vocab/lists/repository_prefix/term/{term}/create")
+//			jndiName = 'java:comp/env/repoUpdateUrl'
+//		}
+//	} else if(Environment.getCurrent() == Environment.PRODUCTION) {
+//		repoFetchUrl(org.springframework.jndi.JndiObjectFactoryBean){
+//			jndiName = 'java:comp/env/repoFetchUrl'
+//		}
+//		repoUpdateUrl(org.springframework.jndi.JndiObjectFactoryBean){
+//			jndiName = 'java:comp/env/repoUpdateUrl'
+//		}
+//	} else if(Environment.getCurrent() == Environment.TEST) {
 	}
 }
