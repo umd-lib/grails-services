@@ -2,7 +2,7 @@ package edu.umd.lib.grails.services
 
 import groovy.transform.ToString
 
-@ToString(includeNames=true)
+
 class AutoNumber {
 
     static constraints = {
@@ -24,4 +24,5 @@ class AutoNumber {
 	Repository repository
 	Initials initials
 	Date entryDate
+	
 }

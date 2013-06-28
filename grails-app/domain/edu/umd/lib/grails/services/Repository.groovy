@@ -2,7 +2,7 @@ package edu.umd.lib.grails.services
 
 import groovy.transform.ToString
 
-@ToString()
+
 class Repository {
 
     static constraints = {

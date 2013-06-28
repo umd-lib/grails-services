@@ -38,7 +38,7 @@ class AutoNumberController {
 		if(repo == null) {
 			repo = new Repository(repositoryName : params.repository)
 			repo.save(failOnError : true, flush: true)
-			setRepos (params.repository)
+//			setRepos (params.repository)
 		}
 		
 		def init = Initials.findByInitialsName(params.initials)
@@ -64,49 +64,49 @@ class AutoNumberController {
 		}
 	}
 	
-	def setRepos (String term) {
-		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-		def updateUrl =  repoUpdateUrl as String
-		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
-		log.debug(updateUrl)
-		try {
-			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
-		} catch (Exception e) {
-			log.error("Problem setting repos in fedora", e)
-		} catch (FactoryConfigurationError e) {
-			log.error("Problem getting repos from fedora", e)
-		}
-	}
+//	def setRepos (String term) {
+//		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+//		def updateUrl =  repoUpdateUrl as String
+//		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
+//		log.debug(updateUrl)
+//		try {
+//			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
+//		} catch (Exception e) {
+//			log.error("Problem setting repos in fedora", e)
+//		} catch (FactoryConfigurationError e) {
+//			log.error("Problem getting repos from fedora", e)
+//		}
+//	}
 	
 	def getRepos () {
 		
-		edu.umd.lib.grails.services.Response rp3 = null;
-		try {
-			org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
-			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
-		} catch (Exception e) {
-			log.error("Problem getting repos from fedora", e)
-		} catch (FactoryConfigurationError e) {
-			log.error("Problem getting repos from fedora", e)
-		}
+//		edu.umd.lib.grails.services.Response rp3 = null;
+//		try {
+//			org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
+//			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
+//			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
+//		} catch (Exception e) {
+//			log.error("Problem getting repos from fedora", e)
+//		} catch (FactoryConfigurationError e) {
+//			log.error("Problem getting repos from fedora", e)
+//		}
 	
 		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
-		def repoUnion = new TreeSet()
+//		def repoUnion = new TreeSet()
+//		
+//		if(dbReps != null) {
+//			for(Repository dbRep : dbReps) {
+//				repoUnion.add(dbRep.repositoryName)
+//			}
+//		}
+//		
+//		if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
+//			for(String frep : rp3.getList().get(0).getTerms()) {
+//				repoUnion.add(frep)
+//			}
+//		}
 		
-		if(dbReps != null) {
-			for(Repository dbRep : dbReps) {
-				repoUnion.add(dbRep.repositoryName)
-			}
-		}
-		
-		if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
-			for(String frep : rp3.getList().get(0).getTerms()) {
-				repoUnion.add(frep)
-			}
-		}
-		
-		return repoUnion
+		return dbReps
 	}
 
     def save() {
