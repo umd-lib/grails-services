@@ -32,13 +32,15 @@ class AutoNumberController {
 	}
 
 	def save2() {
+		// Lookup repository, create if not found
 		def repo = Repository.findByRepositoryName(params.repository)
 		
 		if(repo == null) {
 			repo = new Repository(repositoryName : params.repository)
 			repo.save(failOnError : true, flush: true)
 		}
-		
+
+		// Lookup initials, create if not found		
 		def init = Initials.findByInitialsName(params.initials)
 		
 		if(init == null) {
@@ -46,20 +48,54 @@ class AutoNumberController {
 			init.save(failOnError : true, flush: true)
 		}
 		
-		def newRec = new AutoNumber(initials: init, repository : repo, entryDate: new Date())
-		def retVal = newRec.save(failOnError : true, flush: true)
-		if(retVal == null) {
-			response.status = 404;
-			render "Failed to update DataBase"
-		} else {
-			def restRetPojo = new RestRetPojo (retVal)
-			
-			def repoUnion = getRepos ()
-			
-			def map = [repos : repoUnion,
-				fileName : restRetPojo.getFilename(), autoNumberInstance: retVal ]
-			render (view : "create2", model : map)
+		// Get fileCount
+		def fileCount = params.fileCount
+		
+		try {
+			fileCount = fileCount.toInteger()
+			if (fileCount < 1) {
+				throw new Exception("must be greater than 0")
+			}
 		}
+		catch (Exception e) {
+			response.status = 404
+			render "Error in file count (${params.fileCount}): ${e.message}"
+			return
+		}
+
+		// Create all new AutoNumber entries
+		def firstRetVal = null
+		def lastRetVal = null
+		(1..fileCount).each {
+			def newRec = new AutoNumber(initials: init, repository : repo, entryDate: new Date())
+			def retVal = newRec.save(failOnError : true, flush: true)
+			if(retVal == null) {
+				response.status = 404;
+				render "Failed to update DataBase"
+				return
+			}
+			if (firstRetVal == null) {
+				firstRetVal = retVal
+			}
+			lastRetVal = retVal
+		}
+
+		// Get the list of repositories
+		def repoUnion = getRepos ()
+
+		// Build the file name(s)		
+		def restRetPojo = new RestRetPojo (firstRetVal)
+		def fileName = restRetPojo.getFilename()
+		
+		if (firstRetVal != lastRetVal) {
+			restRetPojo = new RestRetPojo (lastRetVal)
+			fileName += " to " + restRetPojo.getFilename()
+		}
+
+		// Render the result page
+		def map = [repos : repoUnion,
+			fileName : fileName, autoNumberInstance: lastRetVal ]
+		render (view : "create2", model : map)
 	}
 	
 	def getRepos () {

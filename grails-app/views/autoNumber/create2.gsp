@@ -57,11 +57,17 @@
 						</label>
 						<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list(sort:'initialsName',order:'asc')}" noSelection="['':'-Choose your initials-']" />
 					</div>
+					<div class="fieldcontain">
+						<label for="fileCount">
+							<g:message code="autoNumber.fileCount.label" default="File Count" />
+						</label>
+						<g:textField name="fileCount" id="fileCountBox" value="1" size="30"/>
+					</div>
 					<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'fileName', 'error')} ">
 						<label for="fileName">
 							<g:message code="autoNumber.fileName.label" default="File Name" />	
 						</label>
-						<g:textField name="fileName" readonly="true" value="${fileName}" />
+						<g:textField name="fileName" readonly="true" value="${fileName}" size="30"/>
 					</div>	
 				</fieldset>		
 				<fieldset class="buttons">
