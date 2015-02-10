@@ -43,3 +43,6 @@
 
 # other
 *.iws
+
+# Eclipse build files
+/bin/
