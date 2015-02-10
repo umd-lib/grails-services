@@ -61,7 +61,7 @@
 						<label for="fileName">
 							<g:message code="autoNumber.fileName.label" default="File Name" />	
 						</label>
-						<g:textField name="fileName" disabled="true" value="${fileName}" />
+						<g:textField name="fileName" readonly="true" value="${fileName}" />
 					</div>	
 				</fieldset>		
 				<fieldset class="buttons">
