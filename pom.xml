@@ -5,7 +5,7 @@
 	<groupId>edu.umd.lib.grails.services</groupId>
 	<artifactId>grails-services</artifactId>
 	<packaging>grails-app</packaging>
-	<version>0.1</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>grails-services</name>
 	<description>grails-services</description>
 
