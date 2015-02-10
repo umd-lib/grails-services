@@ -26,19 +26,17 @@ class AutoNumberController {
 	
 	def create2() {
 		def repoUnion = getRepos ()	
-		def map = [repos : repoUnion , //['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+		def map = [repos : repoUnion,
 		 autoNumberInstance: new AutoNumber(params) ]
 		render (view : "create2", model : map)
 	}
 
 	def save2() {
-		println params
 		def repo = Repository.findByRepositoryName(params.repository)
 		
 		if(repo == null) {
 			repo = new Repository(repositoryName : params.repository)
 			repo.save(failOnError : true, flush: true)
-//			setRepos (params.repository)
 		}
 		
 		def init = Initials.findByInitialsName(params.initials)
@@ -58,53 +56,15 @@ class AutoNumberController {
 			
 			def repoUnion = getRepos ()
 			
-			def map = [repos : repoUnion, //Repository.list(sort:'repositoryName',order:'asc'),//['bcast', 'bna', 'histmss', 'litmss', 'map', 'md', 'ntl', 'rare', 'scpa', 'univarch', 'usgov'],
+			def map = [repos : repoUnion,
 				fileName : restRetPojo.getFilename(), autoNumberInstance: retVal ]
 			render (view : "create2", model : map)
 		}
 	}
 	
-//	def setRepos (String term) {
-//		org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-//		def updateUrl =  repoUpdateUrl as String
-//		updateUrl = updateUrl.replaceFirst('\\{term\\}', term)
-//		log.debug(updateUrl)
-//		try {
-//			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(updateUrl, edu.umd.lib.grails.services.Response.class)
-//		} catch (Exception e) {
-//			log.error("Problem setting repos in fedora", e)
-//		} catch (FactoryConfigurationError e) {
-//			log.error("Problem getting repos from fedora", e)
-//		}
-//	}
-	
 	def getRepos () {
 		
-//		edu.umd.lib.grails.services.Response rp3 = null;
-//		try {
-//			org.springframework.web.client.RestTemplate rt = new org.springframework.web.client.RestTemplate()
-//			org.springframework.http.ResponseEntity rp2 = rt.getForEntity(repoFetchUrl, edu.umd.lib.grails.services.Response.class)
-//			rp3 = (edu.umd.lib.grails.services.Response)rp2.getBody()
-//		} catch (Exception e) {
-//			log.error("Problem getting repos from fedora", e)
-//		} catch (FactoryConfigurationError e) {
-//			log.error("Problem getting repos from fedora", e)
-//		}
-	
 		def dbReps = Repository.list(sort:'repositoryName',order:'asc')
-//		def repoUnion = new TreeSet()
-//		
-//		if(dbReps != null) {
-//			for(Repository dbRep : dbReps) {
-//				repoUnion.add(dbRep.repositoryName)
-//			}
-//		}
-//		
-//		if(rp3 != null && rp3.getList() != null && rp3.getList().get(0) != null) {
-//			for(String frep : rp3.getList().get(0).getTerms()) {
-//				repoUnion.add(frep)
-//			}
-//		}
 		
 		return dbReps
 	}
