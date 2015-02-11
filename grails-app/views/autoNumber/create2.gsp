@@ -49,13 +49,21 @@
 						<label for="repository">
 							<g:message code="autoNumber.repository.label" default="Repository" />						
 						</label>
-						<g:select name="repositorySelect" id="selectBox" from="${repos}" noSelection="['':'-Choose your repository-']" onchange="getCombo(this,'repositoryInput')"/>
+						<g:select name="repositorySelect" id="selectBox" from="${repos}" 
+						          noSelection="['':'-Choose your repository-']" 
+						          onchange="getCombo(this,'repositoryInput')"
+						           value="${autoNumberInstance.repository}"
+						/>
 					</div>				
 					<div class="fieldcontain ${hasErrors(bean: autoNumberInstance, field: 'initials', 'error')} ">
 						<label for="initials">
 							<g:message code="autoNumber.initials.label" default="Initials" />
 						</label>
-						<g:select name="initialsSelect" id="initialsSelectBox" from="${edu.umd.lib.grails.services.Initials.list(sort:'initialsName',order:'asc')}" noSelection="['':'-Choose your initials-']" />
+						<g:select name="initialsSelect" id="initialsSelectBox" 
+						          from="${edu.umd.lib.grails.services.Initials.list(sort:'initialsName',order:'asc')}" 
+						          noSelection="['':'-Choose your initials-']" 
+						          value="${autoNumberInstance.initials}"
+						/>
 					</div>
 					<div class="fieldcontain">
 						<label for="fileCount">
