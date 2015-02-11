@@ -56,6 +56,9 @@ class AutoNumberController {
 			if (fileCount < 1) {
 				throw new Exception("must be greater than 0")
 			}
+			if (fileCount > 1000) {
+				throw new Exception("cannot be larger than 1000")
+			}
 		}
 		catch (Exception e) {
 			response.status = 404
